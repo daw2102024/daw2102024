@@ -65,7 +65,7 @@ function comprobarCredencialesInicioSesion() {
     $.ajax({
         type: "POST",
         // además de comprobar las credenciales, si son correctas crea la sesión
-        url: "/Login/login",
+        url: "Login/login",
         data: { user: inputUser.value, pass: inputPassword.value },
         dataType: 'JSON',
         success: function (response) {
