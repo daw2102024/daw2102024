@@ -105,7 +105,6 @@ function cargarTablaMovimientos() {
         url: "Movimientos/obtenerArrayMovimientos",
         dataType: "JSON",
         success: function (arrayMovimientos) {
-            console.log(arrayMovimientos)
 
             let containerTablaMovimientos = document.querySelector('#containerTablaMovimientos');
 

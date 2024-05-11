@@ -9,7 +9,6 @@ function cerrarSesionSinAlerta() {
         url: "FuncionesGenerales/cerrarSesion",
         dataType: 'JSON',
         success: function (response) {
-            console.log(response);
             // si devuelve true, significa que se ha borrado con éxito
             if (response == true) {
                 // redirijo al login
@@ -212,7 +211,6 @@ function cambiarUsernameBD() {
             data: { nuevoUsername: nuevoUsername, password: password },
             dataType: "JSON",
             success: function (response) {
-                console.log(response);
                 if (response.status == 'error') {
                     notificar('Error al cambiar el nombre de usuario', response.message);
                 }
@@ -247,7 +245,6 @@ function cambiarNombreBD() {
             data: { nuevoNombre: nuevoNombre, password: password },
             dataType: "JSON",
             success: function (response) {
-                console.log(response);
                 if (response.status == 'error') {
                     notificar('Error al cambiar el nombre y apellidos', response.message);
                 }

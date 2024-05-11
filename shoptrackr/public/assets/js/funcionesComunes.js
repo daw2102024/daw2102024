@@ -62,7 +62,6 @@ function cerrarSesion() {
         url: "FuncionesGenerales/cerrarSesion",
         dataType: 'JSON',
         success: function (response) {
-            console.log(response);
             // si devuelve true, significa que se ha borrado con éxito
             if (response == true) {
                 // redirijo al login

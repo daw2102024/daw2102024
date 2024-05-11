@@ -386,7 +386,6 @@ function confirmarCompra() {
         // hago el push
         arrayProductosVenta.push(arrayProducto)
     });
-    console.log(arrayProductosVenta);
 
     // precio total de la venta
     const precioTotal = document.querySelector('#precioTotal').innerText;

@@ -496,11 +496,9 @@ function colocarInputsEditar(btnEditar) {
 
     // cambio los botones de opciones que ya estaban por los de Confirmar y Cancelar edición
     let tdOpciones = btnEditar.parentNode;
-    console.log(tdOpciones);
 
     // quito los botones que ya estaban para meter los de confirmación y cancelación de edición
     let btnBorrar = tdOpciones.querySelector(".btnBorrar");
-    console.log(btnBorrar);
     btnBorrar.remove();
     btnEditar.remove();
 
@@ -714,7 +712,6 @@ function editarEmpleadoBD() {
             data: { datosEditados: datosEditados },
             dataType: "JSON",
             success: function (response) {
-                console.log(response);
                 // si es success, la edición se ha realizado con éxito
                 if (response.status == 'success') {
                     // creo una cookie que permitirá notificar que el empleado ha sido editado

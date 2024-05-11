@@ -59,8 +59,6 @@ function comprobarStock() {
         url: "Menu/comprobarStocks",
         dataType: "JSON",
         success: function (response) {
-            console.log(response);
-
             // creo el contenedor de notificaciones y lo añado al body
             const containerNotificaciones = document.createElement('div');
             containerNotificaciones.className = 'container';
@@ -108,8 +106,8 @@ $.ajax({
         }
 
     },
-    error: function (response) {
-        console.log(response);
+    error: function (error) {
+        console.log(error);
     }
 });
 

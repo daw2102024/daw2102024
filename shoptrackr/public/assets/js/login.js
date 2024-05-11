@@ -58,9 +58,6 @@ function comprobarCredencialesInicioSesion() {
     const inputPassword = document.querySelector('#inputPassword');
 
 
-    console.log(inputUser.value);
-    console.log(inputPassword.value);
-
     // petición asíncrona que comprueba si las credenciales son correctas en función de los inputs
     $.ajax({
         type: "POST",
@@ -72,9 +69,7 @@ function comprobarCredencialesInicioSesion() {
 
             // si son válidas, redirige a menu
             if (response == true) {
-                console.log(response);
                 window.location.href = "/";
-
             }
             // si no son válidas, lo notifica
             else {
@@ -92,8 +87,8 @@ function comprobarCredencialesInicioSesion() {
                 });
             }
         },
-        error: function (response) {
-            console.log(response);
+        error: function (error) {
+            console.log(error);
         }
     });
 }

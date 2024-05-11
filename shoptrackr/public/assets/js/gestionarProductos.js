@@ -645,7 +645,6 @@ function cargarTablaMarcasCategorias(tabla) {
 
             // aplico el evento a btnInsertar
             tablaMarcasCategorias.querySelector('#btnInsertar').addEventListener('click', function () {
-                console.log(tablaMarcasCategorias.querySelector('#btnInsertar'));
                 if (tabla == 'marcas') {
                     const inputId = document.querySelector('#inputID_MARCA');
                     const inputNombre = document.querySelector('#inputNOMBRE_MARCA');
