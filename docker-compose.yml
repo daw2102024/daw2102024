@@ -1,0 +1,73 @@
+version: '3.1'
+
+# declaración de servicios (contenedores)
+services:
+
+  # contenedor con php, apache y el proyecto de Codeigniter 4
+  php-apache:
+
+    # imagen utilizada para crear el contenedor
+    image: gonzalodelafuente/shoptrackr_server:1.0
+
+    # nombre del contenedor
+    container_name: php-apache
+
+    # indico que se reinicie el contenedor cuando lo necesite
+    restart: always
+
+    # puerto de acceso al contenedor
+    ports:
+      - 80:80
+
+    # indico que se inicie después del contenedor de mysql, para evitar problemas
+    depends_on:
+      - mysql
+
+    # permito el acceso de este contenedor al de mysql
+    links:
+      - mysql
+
+    # fichero .env con variables globales
+    env_file:
+      - variables_globales.env
+
+    # defino qué ip privada tendrá este contenedor
+    networks:
+      red_interna:
+        ipv4_address: 192.168.30.2
+
+  # contenedor de mysql con la base de datos
+  mysql:
+
+    # imagen utilizada para crear el contenedor
+    image: gonzalodelafuente/shoptrackr_db:1.0
+
+    # nombre del contenedor
+    container_name: mysql
+
+    # indico que se reinicie el contenedor cuando lo necesite
+    restart: always
+
+    # expongo el puerto de acceso al contenedor
+    expose:
+      - 3306
+
+    # puerto de acceso al contenedor
+    ports:
+      - 3306:3306
+
+    # contraseña del usuario root
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+
+    # defino qué ip privada tendrá este contenedor
+    networks:
+      red_interna:
+        ipv4_address: 192.168.30.3
+
+# defino una red privada a la que estarán contectados ambos contenedores
+networks:
+  red_interna:
+    ipam:
+      config:
+        - subnet: 192.168.30.0/24
