@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://' . $_ENV['public_ip'] . '/';
+    public string $baseURL;
 
 
     /**
@@ -200,4 +200,13 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    /**
+     * Constructor de la clase, permite indicar la URL de acceso a la aplicación
+     */
+    public function __construct()
+    {
+        $this->baseURL = 'http://' . $_ENV["public_ip"] . '/';
+    }
+
 }
