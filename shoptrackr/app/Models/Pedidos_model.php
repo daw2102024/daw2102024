@@ -34,6 +34,9 @@ class Pedidos_model extends Model
      */
     public function insertarPedido($idEmpleado, $precioTotal)
     {
+        // defino la zona horaria a la de madrid, ya que uso la hora actual más adelante
+        date_default_timezone_set('Europe/Madrid');
+
         // cargo el builder de la tabla de pedidos
         $builder = $this->db->table($this->table);
 

@@ -61,9 +61,7 @@
      text-align: center;
  }
 
- #containerTablaVentas {
+ #containerTablaVentas,
+ #containerTablaCarrito {
      animation: fadein 1s;
-
  }
-
-

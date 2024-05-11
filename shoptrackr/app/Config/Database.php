@@ -26,7 +26,7 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
+        'hostname'     => '192.168.15.3', // ip correspondiente al contenedor de mysql (hecho con subnets para asegurar el funcionamiento)
         'username'     => 'root',
         'password'     => 'pass',
         'database'     => 'shoptrackr',
