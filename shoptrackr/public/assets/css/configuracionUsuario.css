@@ -1,6 +1,6 @@
 #containerOpciones {
   width: 65%;
-  height: fit-content;
+  height: fit-content !important;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
