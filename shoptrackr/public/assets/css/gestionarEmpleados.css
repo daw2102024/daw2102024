@@ -53,3 +53,7 @@ h2 {
 #containerTablaEmpleados {
     animation: fadein 1s;
 }
+
+#tablaEmpleados_wrapper{
+    overflow: auto;
+}

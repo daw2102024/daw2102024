@@ -65,3 +65,7 @@
  #containerTablaCarrito {
      animation: fadein 1s;
  }
+
+ #tablaVentas_wrapper{
+    overflow: auto;
+}

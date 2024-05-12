@@ -1299,9 +1299,3 @@ $.ajax({
         console.log(error);
     }
 });
-
-
-// hacer los fadein para todas las páginas
-// meter hover a todos los botones
-
-// si son los inputs de precio y coste, text-align: right

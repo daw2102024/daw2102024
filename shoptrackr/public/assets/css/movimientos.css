@@ -28,3 +28,7 @@ h2 {
 #containerTablaMovimientos {
     animation: fadein 1s;
 }
+
+#tablaMovimientos_wrapper{
+    overflow: auto;
+}

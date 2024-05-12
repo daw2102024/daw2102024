@@ -1,6 +1,6 @@
 #containerOpciones {
   width: 65%;
-  height: 30vh;
+  height: fit-content;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -9,9 +9,6 @@
   transition: height 2s;
 }
 
-.small {
-  height: 25vh !important;
-}
 
 #containerOpciones a {
   text-decoration: none;
@@ -126,10 +123,6 @@ input[type="password"]:focus {
 
   #containerLogoHeader {
     width: 105px;
-  }
-
-  .small {
-    height: 300px !important;
   }
 
 }

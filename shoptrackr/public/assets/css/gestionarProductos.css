@@ -114,3 +114,7 @@ h2 {
 #btnMostrarCategorias {
     margin: 17px;
 }
+
+#tablaProductos_wrapper {
+    overflow: auto;
+}

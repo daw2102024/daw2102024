@@ -19,7 +19,7 @@ function crearAlertaStock(arrayProductos, nivelAlerta, containerNotificaciones) 
     const alerta = document.createElement('div');
     alerta.className = 'container';
 
-    let titulo = document.createElement('h5');
+    let titulo = document.createElement('div');
 
     // defino el id y el interior del div en función del nivel de alerta
     switch (nivelAlerta) {

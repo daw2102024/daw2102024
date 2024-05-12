@@ -79,8 +79,6 @@ function crearFormulario(funcion) {
         document.querySelector('#containerFormularioAccion').remove();
     }
 
-    document.querySelector('#containerOpciones').className = document.querySelector('#containerOpciones').className + ' small';
-
     const formularioAccion = document.createElement('div');
     formularioAccion.className = 'container';
     formularioAccion.id = 'containerFormularioAccion';
