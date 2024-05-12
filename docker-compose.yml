@@ -7,7 +7,7 @@ services:
   php-apache:
 
     # imagen utilizada para crear el contenedor
-    image: gonzalodelafuente/shoptrackr_server:latest
+    image: gonzalodelafuente/shoptrackr_server:1.4
 
     # nombre del contenedor
     container_name: php-apache
