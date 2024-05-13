@@ -1,0 +1,9 @@
+# imagen base
+FROM mariadb:latest
+
+# inicia el servicio de mariadb
+CMD ["mariadbd"]
+
+# añado el script de la bd, para que se ejecute automáticamente
+ADD shoptrackr.sql /docker-entrypoint-initdb.d/script.sql
+

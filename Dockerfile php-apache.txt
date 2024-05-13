@@ -1,0 +1,31 @@
+# imagen base
+FROM php:8.3-apache
+
+# copio el proyecto de codeigniter en el document root de apache
+COPY shoptrackr/ /var/www/html
+
+# instalaciones de extensiones de php necesarias
+RUN apt update && apt install -y libicu-dev libzip-dev libpng-dev
+
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
+
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
+RUN docker-php-ext-install zip && docker-php-ext-enable zip
+
+RUN docker-php-ext-install gd
+
+# doy permisos de escritura a carpetas que lo necesitan
+RUN chmod -R 777 /var/www/html/public/assets && chmod -R 777 /var/www/html/writable
+
+# habilito el rewrite y reinicio el servicio de apache para que se aplique
+RUN a2enmod rewrite && service apache2 restart
+
+# instalo el nano
+RUN apt install -y git unzip nano
+
+# instalo composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# ejecuto un composer install para las dependencias
+RUN cd /var/www/html && composer install --no-dev --optimize-autoloader
