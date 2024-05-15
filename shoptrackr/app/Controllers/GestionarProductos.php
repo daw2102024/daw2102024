@@ -8,6 +8,9 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 // controlador correspondiente a la gestión de productos
 class GestionarProductos extends BaseController
 {
+    /**
+     * Función principal del controlador de GestionarProductos, comprueba la sesión y muestra la página correspondiente o redirige al login en función de ella
+     */
     public function index()
     {
         // inicializo el servicio de session
@@ -21,9 +24,7 @@ class GestionarProductos extends BaseController
             // si no está la sesión creada, redirijo al login
             return redirect()->to('/login');
         }
-
     }
-
 
     /**
      * Función que devuelve un array con la cabeceras y todos los productos de la base de datos
@@ -37,7 +38,6 @@ class GestionarProductos extends BaseController
         $productosModel = model('Productos_model');
         $marcasModel = model('Marcas_model');
         $categoriasModel = model('Categorias_model');
-
 
         // Array que contendrá los datos de la tabla 
         $arrayDatos = array();
@@ -99,7 +99,6 @@ class GestionarProductos extends BaseController
         // devuelvo el array con los productos
         return json_encode($arrayDatos);
     }
-
 
     /**
      * Función que devuelve un array con todas las marcas de la base de datos
@@ -356,7 +355,6 @@ class GestionarProductos extends BaseController
         }
         // en el caso de que no sea marca o categoria (que no debería pasar), devuelvo null
         return null;
-
     }
 
     /**
@@ -374,8 +372,6 @@ class GestionarProductos extends BaseController
 
         // cargo el modelo de productos
         $productosModel = model('Productos_model');
-
-
 
         if ($tabla == 'marca') {
             $marcasModel = model('Marcas_model');
@@ -513,7 +509,6 @@ class GestionarProductos extends BaseController
         }
         // en el caso de que no sea marca o categoria (que no debería pasar), devuelvo null
         return null;
-
     }
 
     /**
@@ -608,7 +603,6 @@ class GestionarProductos extends BaseController
                             // bandera que indica que se han actualizado stocks, para sacar alertas
                             $stockActualizado = true;
                         }
-
 
                     } else {
                         // bandera que indica que hay algún producto que no se ha encontrado, para sacar alertas

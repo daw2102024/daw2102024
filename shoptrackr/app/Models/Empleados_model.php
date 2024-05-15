@@ -318,4 +318,29 @@ class Empleados_model extends Model
             return false;
         }
     }
+
+    /**
+     * Función que comprueba si un username ya existe en la base de datos
+     * @param string $username Nombre de usuario que se quiere comprobar
+     * @return boolean que indica si el username existe o no
+     */
+    public function comprobarSiExisteUsername($username)
+    {
+        // cargo el builder con la tabla de empleados
+        $builder = $this->db->table($this->table);
+
+        // busco por el username pasado por parámetro en la bd
+        $builder->select('user');
+        $builder->where('user', $username);
+        $resultado = $builder->get()->getRow();
+
+        // si el resultado es distinto de null
+        if (isset($resultado)) {
+            // devuelvo true
+            return true;
+        } else {
+            // si no, devuelvo false
+            return false;
+        }
+    }
 }

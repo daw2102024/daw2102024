@@ -212,6 +212,11 @@ function cambiarUsernameBD() {
                 if (response.status == 'error') {
                     notificar('Error al cambiar el nombre de usuario', response.message);
                 }
+                else if(response.status == 'errorUsername'){
+                    notificar('Error al cambiar el nombre de usuario', response.message);
+                    document.querySelectorAll('input')[0].style.border = '4px solid red';
+                    
+                }
                 else {
                     notificar('Nombre de usuario cambiado', response.message);
                     setTimeout(() => {

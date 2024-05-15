@@ -621,8 +621,8 @@ function insertarEmpleadoBD() {
                     // recargo la página
                     window.location.reload();
                 }
-                // si es failed, algo ha fallado al realizar la inserción, lo notifico y muestro el mensaje
-                else if (response.status == 'failed') {
+                // si es error, algo ha fallado al realizar la inserción, lo notifico y muestro el mensaje
+                else if (response.status == 'error') {
                     notificar('Ha habido un problema', response.message);
                 }
 
@@ -661,7 +661,7 @@ function borrarEmpleadoBD(btnBorrar) {
                 // recargo la página para que se vuelva a cargar la tabla
                 window.location.reload();
             }
-            // si es failed, algo ha fallado al borrar el empleado, lo notifico y saco el mensaje
+            // si es error, algo ha fallado al borrar el empleado, lo notifico y saco el mensaje
             else {
                 notificar('Ha habido un problema', response.message);
             }
@@ -719,7 +719,7 @@ function editarEmpleadoBD() {
                     // recargo la página para que se vuelvan a cargar los datos de la tabla
                     window.location.reload();
                 }
-                // si ha sido failed, lo notifico y saco el mensaje de error
+                // si ha sido error, lo notifico y saco el mensaje de error
                 else {
                     notificar('Ha habido un problema', response.message);
                 }

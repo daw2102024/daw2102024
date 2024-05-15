@@ -14,7 +14,9 @@ class ConfiguracionUsuario extends BaseController
         $this->session = \Config\Services::session();
     }
 
-
+    /**
+     * Función principal del controlador de ConfiguracionUsuario, comprueba la sesión y muestra la página correspondiente o redirige al login en función de ella
+     */
     public function index()
     {
         // si está la sesión creada, saco la vista del menu
@@ -52,6 +54,15 @@ class ConfiguracionUsuario extends BaseController
                 )
             );
         }
+        // compruebo si ese nombre de usuario ya existe en la base de datos
+        else if ($this->comprobarSiExisteUsername($user)) {
+            return json_encode(
+                array(
+                    'status' => 'errorUsername',
+                    'message' => 'Ese <b>nombre de usuario ya existe</b> en la base de datos'
+                )
+            );
+        }
         // no hay más comprobaciones que hacer, cambio el nombre de usuario en la BD
         else {
             // devuelvo success o error y el mensaje que se sacará en la alerta
@@ -71,8 +82,8 @@ class ConfiguracionUsuario extends BaseController
                 );
             }
         }
-
     }
+
     /**
      * Función que cambia el nombre y apellidos de un empleado en la base de datos
      * @return string JSON que contiene el estado de la operación y un mensaje informativo
@@ -117,9 +128,7 @@ class ConfiguracionUsuario extends BaseController
                 );
             }
         }
-
     }
-
 
     /**
      * Función que cambia la contraseña de un empleado en la base de datos
@@ -178,6 +187,20 @@ class ConfiguracionUsuario extends BaseController
                 }
             }
         }
+    }
+
+    /**
+     * Función que comprueba si ya existe un username en la base de datos
+     * @param string $username Nombre del usuario que se quiere comprobar
+     * @return boolean Boolean que indica si ese username ya existe
+     */
+    public function comprobarSiExisteUsername($username)
+    {
+        // cargo el modelo de empleados
+        $empleadosModel = model('Empleados_model');
+
+        // devuelvo un boolean que indica si ese username ya existe
+        return $empleadosModel->comprobarSiExisteUsername($username);
     }
 }
 

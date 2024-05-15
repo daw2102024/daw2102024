@@ -98,7 +98,6 @@ class FuncionesGenerales extends BaseController
                 // dejo la columna = 2 para volver sacar la siguiente fila
                 $col = 2;
             }
-
         }
         // creo el writer
         $writer = new Xlsx($spreadsheet);
@@ -109,7 +108,6 @@ class FuncionesGenerales extends BaseController
         // devuelvo la ruta para redirigir y descargar el excel con js
         return json_encode('./assets/excel/' . $archivo . '.xlsx');
     }
-
 
     /**
      * Método que comprueba el cargo de un usuario y devuelve true si es gerente

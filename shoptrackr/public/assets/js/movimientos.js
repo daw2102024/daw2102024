@@ -1,4 +1,30 @@
 /**
+ * Función que permite aplicar el dataTable a un tabla
+ * @param {string} id Id de la tabla a la que se le quiere aplicar el dataTable
+ * @return {Object} Objeto dataTable aplicado a esa tabla
+ */
+function crearDataTable(id) {
+    const dataTable = $(id).DataTable({
+        // Indica a DataTables que ordene descendentemente la primera columna
+        order: [[0, 'desc']],
+
+        // Cambia el valor del filtrado por número de resultados
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+
+        // Cambia el texto mostrado por cada opción
+        language: {
+            "search": "Buscar:",
+            "lengthMenu": "Mostrando _MENU_ movimientos por página",
+            "zeroRecords": "Ningún movimiento coincide con esas credenciales",
+            "info": "Mostrando página <b>_PAGE_</b> de _PAGES_",
+            "infoEmpty": "No hay movimientos disponibles",
+            "infoFiltered": "(filtrado de <b>_MAX_</b> movimientos totales)"
+        }
+    });
+    return dataTable;
+}
+
+/**
  * Función que recoge los datos de una tabla (quitándo los de la última columna, que son de opciones)
  * @param {string} idTabla ID de la tabla de la cual obtendré los datos
  * @returns {Array} array de datos de la tabla
@@ -69,29 +95,6 @@ function obtenerArrayTabla(idTabla) {
     });
 
     return arrayDeDatos;
-}
-
-/**
- * Función que permite aplicar el dataTable a un tabla
- * @param {string} id Id de la tabla a la que se le quiere aplicar el dataTable
- * @return {Object} Objeto dataTable aplicado a esa tabla
- */
-function crearDataTable(id) {
-    const dataTable = $(id).DataTable({
-        // Cambia el valor del filtrado por número de resultados
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-
-        // Cambia el texto mostrado por cada opción
-        language: {
-            "search": "Buscar:",
-            "lengthMenu": "Mostrando _MENU_ movimientos por página",
-            "zeroRecords": "Ningún movimiento coincide con esas credenciales",
-            "info": "Mostrando página <b>_PAGE_</b> de _PAGES_",
-            "infoEmpty": "No hay movimientos disponibles",
-            "infoFiltered": "(filtrado de <b>_MAX_</b> movimientos totales)"
-        }
-    });
-    return dataTable;
 }
 
 /**
@@ -212,8 +215,6 @@ function crearCelda(filaTabla, tipo, parte) {
                     btnVerDetalles.className = 'btnVerDetalles';
                     btnVerDetalles.innerHTML = '<i class="bi bi-eye-fill"></i>';
 
-
-
                     // añado el evento de ver detalles de pedido
                     btnVerDetalles.addEventListener('click', function () {
                         // guardo el id del pedido del que se quieren mostrar los detalles
@@ -221,13 +222,10 @@ function crearCelda(filaTabla, tipo, parte) {
                         verDetallesPedido(idPedido);
                     });
 
-
-
                     // los añado a la celda
                     celda.appendChild(btnVerDetalles);
                 }
                 tr.appendChild(celda);
-
                 break;
         }
     });
@@ -237,7 +235,6 @@ function crearCelda(filaTabla, tipo, parte) {
 /**
  * Función que crea una tabla con los detalles del pedido clickado
  * @param {int} idPedido id del pedido clickado
-
  */
 function verDetallesPedido(idPedido) {
 
@@ -251,7 +248,6 @@ function verDetallesPedido(idPedido) {
     tablaDetalles.id = 'tablaDetalles';
     containerTablaDetalles.appendChild(tablaDetalles);
 
-
     // creo el thead y el tboby
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
@@ -261,7 +257,7 @@ function verDetallesPedido(idPedido) {
     const thPrincipal = document.createElement('th');
     thPrincipal.colSpan = 4;
     thPrincipal.id = 'thPrincipal';
-    thPrincipal.innerHTML = 'DETALLES DEL PEDIDO N° ' + idPedido + ' <i class="bi bi-info-circle-fill"></i>';
+    thPrincipal.innerHTML = 'DETALLES DE LA VENTA N° ' + idPedido + ' <i class="bi bi-info-circle-fill"></i>';
     trPrincipal.appendChild(thPrincipal);
     thead.appendChild(trPrincipal);
 

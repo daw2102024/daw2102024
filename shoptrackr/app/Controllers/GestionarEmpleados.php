@@ -5,6 +5,9 @@ namespace App\Controllers;
 // controlador correspondiente a la gestión de empleados por parte de un gerente 
 class GestionarEmpleados extends BaseController
 {
+    /**
+     * Función principal del controlador de GestionarEmpleados, comprueba la sesión y muestra la página correspondiente o redirige al login en función de ella
+     */
     public function index()
     {
         // inicializo el servicio de session
@@ -71,7 +74,6 @@ class GestionarEmpleados extends BaseController
         return json_encode($arrayDatos);
     }
 
-
     /**
      * Función que inserta un empleado en la base de datos
      * @return string JSON que contiene el estado de la operación y un mensaje informativo
@@ -97,11 +99,20 @@ class GestionarEmpleados extends BaseController
         if ($this->comprobarSiExisteEmpleado($datosEmpleado['id'])) {
             return json_encode(
                 array(
-                    'status' => 'failed',
-                    'message' => 'Ya existe un empleado con ese id en la Base de Datos'
+                    'status' => 'error',
+                    'message' => '<b>Ya existe un empleado</b> con ese <b>id</b> en la Base de Datos'
                 )
             );
 
+        }
+        // Compruebo si ese username ya existe en la BD
+        else if ($this->comprobarSiExisteUsername($datosEmpleado['user'])) {
+            return json_encode(
+                array(
+                    'status' => 'error',
+                    'message' => '<b>Ya existe un empleado</b> con ese <b>nombre de usuario</b> en la Base de Datos'
+                )
+            );
         } else {
             // todas las comprobaciones realizadas, hago la inserción en la base de datos
             // no me hace falta comprobar si existen esa marca y esa categoría ya que se inserta a partir de select option obtenidos directamente de la bd
@@ -117,7 +128,7 @@ class GestionarEmpleados extends BaseController
             } else {
                 return json_encode(
                     array(
-                        'status' => 'failed',
+                        'status' => 'error',
                         'message' => 'Ha habido un error insertando el empleado en la base de datos'
                     )
                 );
@@ -149,7 +160,7 @@ class GestionarEmpleados extends BaseController
         } else {
             return json_encode(
                 array(
-                    'status' => 'failed',
+                    'status' => 'error',
                     'message' => 'Ha habido un error borrando el empleado de la base de datos'
                 )
             );
@@ -177,22 +188,33 @@ class GestionarEmpleados extends BaseController
         $datosEmpleado['pass'] = $datosEditados[3];
         $datosEmpleado['id_cargo'] = $datosEditados[4];
 
-        // no necesito hacer comprobaciones, ya que el id no se puede editar y el cargo se selecciona directamente de un select, cargado de la BD
+        // Compruebo si ese username ya existe en la BD
+        if ($this->comprobarSiExisteUsername($datosEmpleado['user'])) {
+            return json_encode(
+                array(
+                    'status' => 'error',
+                    'message' => '<b>Ya existe un empleado</b> con ese <b>nombre de usuario</b> en la Base de Datos'
+                )
+            );
+        }
+        // no necesito hacer más comprobaciones, ya que el id no se puede editar y el cargo se selecciona directamente de un select, cargado de la BD
         // si devuelve true, la edición se realizó con éxito, devuelvo el status y el mensaje correspondientes
-        if ($empleadosModel->editarEmpleado($datosEmpleado)) {
-            return json_encode(
-                array(
-                    'status' => 'success',
-                    'message' => 'Se ha editado el empleado <b>' . $datosEmpleado['nombre'] . '</b> en la Base de Datos con éxito.'
-                )
-            );
-        } else {
-            return json_encode(
-                array(
-                    'status' => 'failed',
-                    'message' => 'Ha habido un error editando el empleado en la base de datos'
-                )
-            );
+        else {
+            if ($empleadosModel->editarEmpleado($datosEmpleado)) {
+                return json_encode(
+                    array(
+                        'status' => 'success',
+                        'message' => 'Se ha editado el empleado <b>' . $datosEmpleado['nombre'] . '</b> en la Base de Datos con éxito.'
+                    )
+                );
+            } else {
+                return json_encode(
+                    array(
+                        'status' => 'error',
+                        'message' => 'Ha habido un error editando el empleado en la base de datos'
+                    )
+                );
+            }
         }
     }
 
@@ -212,6 +234,7 @@ class GestionarEmpleados extends BaseController
 
     /**
      * Función que comprueba si existe un empleado a partir de una id
+     * @param int Id del empleado que se quiere comprobar
      * @return boolean Boolean que indica si ese id de empleado ya existe
      */
     public function comprobarSiExisteEmpleado($idEmpleado)
@@ -219,8 +242,22 @@ class GestionarEmpleados extends BaseController
         // cargo el modelo de empleados
         $empleadosModel = model('Empleados_model');
 
-        // devuelvo un booleano que indica si ese id de empleado ya existe
+        // devuelvo un boolean que indica si ese id de empleado ya existe
         return $empleadosModel->obtenerEmpleadoById($idEmpleado);
+    }
+
+    /**
+     * Función que comprueba si ya existe un username en la base de datos
+     * @param string $username Nombre del usuario que se quiere comprobar
+     * @return boolean Boolean que indica si ese username ya existe
+     */
+    public function comprobarSiExisteUsername($username)
+    {
+        // cargo el modelo de empleados
+        $empleadosModel = model('Empleados_model');
+
+        // devuelvo un boolean que indica si ese username ya existe
+        return $empleadosModel->comprobarSiExisteUsername($username);
     }
 
 }

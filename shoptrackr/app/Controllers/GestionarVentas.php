@@ -5,6 +5,9 @@ namespace App\Controllers;
 // controlador correspondiente a la gestión de productos
 class GestionarVentas extends BaseController
 {
+    /**
+     * Función principal del controlador de GestionarVentas, comprueba la sesión y muestra la página correspondiente o redirige al login en función de ella
+     */
     public function index()
     {
         // inicializo el servicio de session
@@ -20,7 +23,6 @@ class GestionarVentas extends BaseController
         }
 
     }
-
 
     /**
      * Función que devuelve un array con la cabeceras y todos los productos de la base de datos
@@ -48,7 +50,6 @@ class GestionarVentas extends BaseController
             'PRECIO',
             'OPCIONES'
         );
-
 
         // objeto con todos los productos, así puedo guardar en el array la marca y la categoría
         $objetoTodosProductos = $productosModel->obtenerTodosProductos();
@@ -167,11 +168,5 @@ class GestionarVentas extends BaseController
                 );
             }
         }
-
     }
-
-
 }
-
-
-
